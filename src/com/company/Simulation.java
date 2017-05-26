@@ -1,5 +1,7 @@
 package com.company;
 
+import java.awt.*;
+
 /**
  * Created by Guillaume on 26/05/2017.
  */
