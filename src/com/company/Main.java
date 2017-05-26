@@ -3,7 +3,9 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        System.out.println("test");
+
+        Simulation sim = new Simulation(5, 3, 1);
+        Rendu rendu = new Rendu(800, 600);
+
     }
 }
