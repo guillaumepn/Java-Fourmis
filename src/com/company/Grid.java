@@ -16,7 +16,7 @@ public class Grid extends JPanel {
         this.cellSize = cellSize;
     }
 
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         g.setColor(Color.red);
         for (int i = 0; i < 15; i++) {
             g.drawLine(0, i * cellSize, 640, i * cellSize);

@@ -4,21 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Guillaume on 26/05/2017.
+ * Created by Guillaume on 14/06/2017.
  */
-public class Rectangle extends JPanel {
-
+public class Pheromone extends JPanel {
     private int posX;
     private int posY;
+    private int duration;
 
-    public Rectangle(int posX, int posY) {
+    public Pheromone(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-    }
-
-    public void paintComponent(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(this.posX, this.posY, 5, 5);
+        // this.duration = 10
     }
 
     public int getPosX() {
@@ -35,5 +31,13 @@ public class Rectangle extends JPanel {
 
     public void setPosY(int posY) {
         this.posY = posY;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }
