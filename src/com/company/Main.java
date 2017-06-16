@@ -14,7 +14,7 @@ public class Main {
         menuInfo = menu.getValue();
 
         Simulation sim = new Simulation(menuInfo.getNbAnt(), menuInfo.getNbFood(), menuInfo.getExpiPheromone());
-        Rendu rendu = new Rendu(640, 480);
+        Rendu rendu = new Rendu(640, 480, sim);
 
 
 

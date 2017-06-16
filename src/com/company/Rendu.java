@@ -10,14 +10,16 @@ import java.util.Random;
  */
 public class Rendu extends JFrame {
 
-    JFrame f = new JFrame();
-    JPanel c = new JPanel();
-    Grid grid = new Grid(15, 20, 32);
-    Ant r = new Ant(30, 30);
-    int widthFrame, heightFrame;
-    int destX = 30, destY = 30;
+    private Simulation simulation;
+    private JFrame f = new JFrame();
+    private JPanel c = new JPanel();
+    private Grid grid = new Grid(15, 20, 32);
+    private Ant r = new Ant(30, 30);
+    private int widthFrame, heightFrame;
+    private int destX = 30, destY = 30;
 
-    public Rendu(int widthFrame, int heightFrame) {
+    public Rendu(int widthFrame, int heightFrame, Simulation simulation) {
+        this.simulation = simulation;
         this.widthFrame = widthFrame;
         this.heightFrame = heightFrame;
         f.setSize(widthFrame, heightFrame);
