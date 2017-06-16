@@ -4,21 +4,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        MenuInfo menuInfo;
-        Menu menu = new Menu();
+//        MenuInfo menuInfo;
+//        Menu menu = new Menu();
+//
+//        menu.setSize(400, 250);
+//        menu.show();
+//
+//        menuInfo = menu.getValue();
 
-
-        menu.setSize(400, 250);
-        menu.show();
-
-        menuInfo = menu.getValue();
-
-        Simulation sim = new Simulation(menuInfo.getNbAnt(), menuInfo.getNbFood(), menuInfo.getExpiPheromone());
+        Simulation sim = new Simulation(20, 20, 20);
         Rendu rendu = new Rendu(640, 480, sim);
 
-
-
-        //rendu.paint();
+        while (true) {
+            sim.nextStep();
+            rendu.paint(sim);
+            try { Thread.sleep(50); } catch (InterruptedException e) { e.printStackTrace(); }
+        }
 
     }
 }

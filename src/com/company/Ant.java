@@ -2,13 +2,16 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by Guillaume on 14/06/2017.
  */
-public class Ant extends JPanel {
+public class Ant extends JComponent {
     private int posX;
     private int posY;
+    private int destX;
+    private int destY;
     private boolean hasFood;
     private Color color;
 
@@ -17,11 +20,7 @@ public class Ant extends JPanel {
         this.posY = posY;
         this.hasFood = false;
         this.color = Color.BLACK;
-    }
-
-    public void paintComponent(Graphics g) {
-        g.setColor(this.color);
-        g.fillRect(this.posX, this.posY, 5, 5);
+        this.getRandomPoint();
     }
 
     public int getPosX() {
@@ -51,5 +50,27 @@ public class Ant extends JPanel {
         } else {
             this.color = Color.BLACK;
         }
+    }
+
+    public int getDestX() {
+        return destX;
+    }
+
+    public void setDestX(int destX) {
+        this.destX = destX;
+    }
+
+    public int getDestY() {
+        return destY;
+    }
+
+    public void setDestY(int destY) {
+        this.destY = destY;
+    }
+
+    public void getRandomPoint() {
+        Random rand = new Random();
+        destX = rand.nextInt(640);
+        destY = rand.nextInt(480);
     }
 }

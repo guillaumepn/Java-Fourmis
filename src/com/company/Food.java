@@ -6,15 +6,24 @@ import java.awt.*;
 /**
  * Created by Guillaume on 14/06/2017.
  */
-public class Pheromone {
+public class Food {
+
+    private int quantity;
     private int posX;
     private int posY;
-    private int duration;
 
-    public Pheromone(int posX, int posY) {
+    public Food(int posX, int posY) {
+        this.quantity = 5;
         this.posX = posX;
         this.posY = posY;
-        // this.duration = 10
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getPosX() {
@@ -31,13 +40,5 @@ public class Pheromone {
 
     public void setPosY(int posY) {
         this.posY = posY;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 }
