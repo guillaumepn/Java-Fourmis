@@ -31,27 +31,27 @@ public class Simulation {
         this.createFoods();
     }
 
-    public void nextStep() {
-        cpt++;
-        for (Ant ant : ants) {
-            if (cpt%50 == 0) {
-                ant.getRandomPoint();
-                cpt = 0;
+        public void nextStep() {
+            cpt++;
+            for (Ant ant : ants) {
+                if (cpt%50 == 0) {
+                    ant.getRandomPoint();
+                    cpt = 0;
+                }
+                int x = ant.getPosX();
+                int y = ant.getPosY();
+                if (x < ant.getDestX())
+                    x++;
+                else
+                    x--;
+                if (y < ant.getDestY())
+                    y++;
+                else
+                    y--;
+                ant.setPosX(x);
+                ant.setPosY(y);
             }
-            int x = ant.getPosX();
-            int y = ant.getPosY();
-            if (x < ant.getDestX())
-                x++;
-            else
-                x--;
-            if (y < ant.getDestY())
-                y++;
-            else
-                y--;
-            ant.setPosX(x);
-            ant.setPosY(y);
         }
-    }
 
     public void createAnts() {
         for (int i = 0; i < this.nbFourmis; i++) {

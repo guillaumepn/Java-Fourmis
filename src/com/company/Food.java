@@ -2,6 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by Guillaume on 14/06/2017.
@@ -12,8 +13,10 @@ public class Food {
     private int posX;
     private int posY;
 
+    Random random = new Random();
+
     public Food(int posX, int posY) {
-        this.quantity = 5;
+        this.quantity = random.nextInt(5) + 2;
         this.posX = posX;
         this.posY = posY;
     }

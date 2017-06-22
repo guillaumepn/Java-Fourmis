@@ -16,7 +16,7 @@ public class Rendu extends JPanel {
 
 
     JFrame f = new JFrame();
-    JPanel c = new JPanel();
+    //JPanel c = new JPanel();
     int widthFrame, heightFrame;
     Simulation sim;
 
@@ -40,6 +40,8 @@ public class Rendu extends JPanel {
         repaint();
     }
 
+    int width;
+    int height;
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -48,6 +50,12 @@ public class Rendu extends JPanel {
         for (Ant ant : sim.getAnts()) {
             g.setColor(Color.black);
             g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
+        }
+        for(Food food : sim.getFoods()){
+            g.setColor(Color.red);
+            width = food.getQuantity() * 2;
+            height = food.getQuantity() * 2;
+            g.fillRect(food.getPosX(), food.getPosY(), width, height);
         }
     }
 
