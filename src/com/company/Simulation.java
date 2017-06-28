@@ -2,6 +2,7 @@ package com.company;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -13,7 +14,7 @@ public class Simulation {
     private int nbNourritures;
     private int vitesseEvap;
     private ArrayList<Ant> ants;
-    private ArrayList<Food> foods;
+    private HashSet<Food> foods;
     private ArrayList<Pheromone> pheromones;
     private Anthill anthill;
     private int destX = 50, destY = 50;
@@ -24,34 +25,36 @@ public class Simulation {
         this.nbNourritures = nbNourritures;
         this.vitesseEvap = vitesseEvap;
         this.ants = new ArrayList<Ant>();
-        this.foods = new ArrayList<Food>();
+        this.foods = new HashSet<Food>();
         this.pheromones = new ArrayList<Pheromone>();
         this.anthill = new Anthill(50, 50);
         this.createAnts();
         this.createFoods();
     }
 
-        public void nextStep() {
-            cpt++;
-            for (Ant ant : ants) {
-                if (cpt%50 == 0) {
-                    ant.getRandomPoint();
-                    cpt = 0;
-                }
-                int x = ant.getPosX();
-                int y = ant.getPosY();
-                if (x < ant.getDestX())
-                    x++;
-                else
-                    x--;
-                if (y < ant.getDestY())
-                    y++;
-                else
-                    y--;
-                ant.setPosX(x);
-                ant.setPosY(y);
+    public void nextStep() {
+        cpt++;
+        for (Ant ant : ants) {
+            if (cpt%50 == 0) {
+                ant.getRandomPoint();
+                cpt = 0;
             }
+            int x = ant.getPosX();
+            int y = ant.getPosY();
+            if (x < ant.getDestX())
+                x++;
+            else
+                x--;
+
+            if (y < ant.getDestY())
+                y++;
+            else
+                y--;
+
+            ant.setPosX(x);
+            ant.setPosY(y);
         }
+    }
 
     public void createAnts() {
         for (int i = 0; i < this.nbFourmis; i++) {
@@ -75,11 +78,11 @@ public class Simulation {
         this.ants = ants;
     }
 
-    public ArrayList<Food> getFoods() {
+    public HashSet<Food> getFoods() {
         return foods;
     }
 
-    public void setFoods(ArrayList<Food> foods) {
+    public void setFoods(HashSet<Food> foods) {
         this.foods = foods;
     }
 

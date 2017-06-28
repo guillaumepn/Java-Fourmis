@@ -48,9 +48,11 @@ public class Ant extends JComponent {
         if (hasFood) {
             this.color = Color.RED;
         } else {
-            this.color = Color.BLACK;
+            this.color = Color.BLUE;
         }
     }
+
+    public Color getColor(){ return color; }
 
     public int getDestX() {
         return destX;
@@ -68,9 +70,14 @@ public class Ant extends JComponent {
         this.destY = destY;
     }
 
+    public Point getPos(){
+        return new Point(posX,posY);
+    }
+
     public void getRandomPoint() {
         Random rand = new Random();
         destX = rand.nextInt(640);
         destY = rand.nextInt(480);
     }
+
 }

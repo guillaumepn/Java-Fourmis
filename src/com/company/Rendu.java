@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -16,7 +18,6 @@ public class Rendu extends JPanel {
 
 
     JFrame f = new JFrame();
-    //JPanel c = new JPanel();
     int widthFrame, heightFrame;
     Simulation sim;
 
@@ -31,7 +32,6 @@ public class Rendu extends JPanel {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLocationRelativeTo(null);
         f.getContentPane().add(this);
-
         f.setVisible(true);
     }
 
@@ -42,13 +42,14 @@ public class Rendu extends JPanel {
 
     int width;
     int height;
+    Map<Point, Integer> Foods = new HashMap<>();
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.black);
         g.fillRect(100, 100, 5, 5);
         for (Ant ant : sim.getAnts()) {
-            g.setColor(Color.black);
+            g.setColor(ant.getColor());
             g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
         }
         for(Food food : sim.getFoods()){
@@ -56,6 +57,7 @@ public class Rendu extends JPanel {
             width = food.getQuantity() * 2;
             height = food.getQuantity() * 2;
             g.fillRect(food.getPosX(), food.getPosY(), width, height);
+            Foods.put(food.getPos(), food.getQuantity());
         }
     }
 
