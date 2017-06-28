@@ -46,17 +46,18 @@ public class Rendu extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.black);
-        g.fillRect(100, 100, 5, 5);
         for (Ant ant : sim.getAnts()) {
-            g.setColor(Color.black);
+            g.setColor(ant.getColor());
             g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
         }
         for(Food food : sim.getFoods()){
-            g.setColor(Color.red);
+            g.setColor(food.getColor());
             width = food.getQuantity() * 2;
             height = food.getQuantity() * 2;
             g.fillRect(food.getPosX(), food.getPosY(), width, height);
         }
+        g.setColor(Color.green);
+        g.fillRect(sim.getAnthill().getPosX(), sim.getAnthill().getPosY(), 10, 10);
     }
 
 }

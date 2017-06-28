@@ -31,9 +31,11 @@ public class Simulation {
         this.createFoods();
     }
 
-        public void nextStep() {
-            cpt++;
-            for (Ant ant : ants) {
+    public void nextStep() {
+        cpt++;
+        for (Ant ant : ants) {
+            // La fourmi n'a pas encore vu de nourriture
+            if (!ant.hasDetectFood()) {
                 if (cpt%50 == 0) {
                     ant.getRandomPoint();
                     cpt = 0;
@@ -50,8 +52,72 @@ public class Simulation {
                     y--;
                 ant.setPosX(x);
                 ant.setPosY(y);
+                for (Food food : foods) {
+                    if (
+                            Math.abs(ant.getPosX() - food.getPosX()) <= 20 &&
+                            Math.abs(ant.getPosY() - food.getPosY()) <= 20 &&
+                            food.getQuantity() > 0
+                            ) {
+                        ant.setDetectFood(true);
+                        ant.setTargetFood(food);
+                        break;
+                    }
+                }
+            } // La fourmi a aperçu de la nourriture
+            else if (ant.hasDetectFood() && !ant.getHasFood()) {
+                ant.setDestX(ant.getTargetFood().getPosX());
+                ant.setDestY(ant.getTargetFood().getPosY());
+                int x = ant.getPosX();
+                int y = ant.getPosY();
+                if (x < ant.getDestX())
+                    x++;
+                else if (x > ant.getDestX())
+                    x--;
+                if (y < ant.getDestY())
+                    y++;
+                else if (y > ant.getDestY())
+                    y--;
+                ant.setPosX(x);
+                ant.setPosY(y);
+                if (
+                        ant.getPosX() == ant.getTargetFood().getPosX() &&
+                        ant.getPosY() == ant.getTargetFood().getPosY() &&
+                        ant.getTargetFood().getQuantity() > 0
+                        ) {
+                    ant.setHasFood(true);
+                    int foodQty = ant.getTargetFood().getQuantity();
+                    foodQty--;
+                    ant.getTargetFood().setQuantity(foodQty);
+                    if (ant.getTargetFood().getQuantity() < 1) {
+                        ant.getTargetFood().setColor(Color.white);
+                    }
+                }
+            } // La fourmi a ramassé la nourriture et retourne à la maison
+            else if (ant.getHasFood()) {
+                ant.setDestX(anthill.getPosX());
+                ant.setDestY(anthill.getPosY());
+                int x = ant.getPosX();
+                int y = ant.getPosY();
+                if (x < ant.getDestX())
+                    x++;
+                else if (x > ant.getDestX())
+                    x--;
+                if (y < ant.getDestY())
+                    y++;
+                else if (y > ant.getDestY())
+                    y--;
+                ant.setPosX(x);
+                ant.setPosY(y);
+                if (
+                        ant.getPosX() == anthill.getPosX() &&
+                        ant.getPosY() == anthill.getPosY()
+                        ) {
+                    ant.setHasFood(false);
+                    ant.setDetectFood(false);
+                }
             }
         }
+    }
 
     public void createAnts() {
         for (int i = 0; i < this.nbFourmis; i++) {
@@ -136,5 +202,4 @@ public class Simulation {
         posY = rand.nextInt(480);
         return posY;
     }
-
 }
