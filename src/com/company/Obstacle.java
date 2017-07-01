@@ -9,18 +9,51 @@ import java.util.ArrayList;
  */
 public class Obstacle {
 
-    private ArrayList<Point> points = new ArrayList<>();
+    private int randomX;
+    private int randomY;
+    private int randomWidth;
+    private int randomHeight;
 
-    public Obstacle(ArrayList<Point> points) {
-        this.points = points;
+    public Obstacle(int randomX, int randomY) {
+        this.randomX = randomX;
+        this.randomY = randomY;
+        this.randomWidth = 50 + (int)(Math.random() * 200);
+        this.randomHeight = 50 + (int)(Math.random() * 200);
     }
 
-    public void setPoints(ArrayList<Point> points){
-        
+    public int getRandomX() {
+        return randomX;
     }
 
-    public ArrayList<Point> getPoints(){
-        return points;
+    public void setRandomX(int randomX) {
+        this.randomX = randomX;
     }
+
+    public int getRandomY() {
+        return randomY;
+    }
+
+    public void setRandomY(int randomY) {
+        this.randomY = randomY;
+    }
+
+    public int getRandomWidth() {
+        return randomWidth;
+    }
+
+    public void setRandomWidth(int randomWidth) {
+        this.randomWidth = randomWidth;
+    }
+
+    public int getRandomHeight() {
+        return randomHeight;
+    }
+
+    public void setRandomHeight(int randomHeight) {
+        this.randomHeight = randomHeight;
+    }
+
+
+
 
 }

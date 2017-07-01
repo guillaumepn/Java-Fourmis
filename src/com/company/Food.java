@@ -12,6 +12,7 @@ public class Food {
     private int posX;
     private int posY;
     private int quantity;
+    private Color color;
 
     Random random = new Random();
 
@@ -19,6 +20,7 @@ public class Food {
         this.quantity = random.nextInt(5) + 2;
         this.posX = posX;
         this.posY = posY;
+        this.color = Color.red;
     }
 
     public int getQuantity() {
@@ -46,4 +48,12 @@ public class Food {
     }
 
     public Point getPos() { return new Point(posX, posY); }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }

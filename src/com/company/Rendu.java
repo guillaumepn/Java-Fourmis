@@ -42,23 +42,34 @@ public class Rendu extends JPanel {
 
     int width;
     int height;
+
+
     Map<Point, Integer> Foods = new HashMap<>();
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.black);
-        g.fillRect(100, 100, 5, 5);
         for (Ant ant : sim.getAnts()) {
             g.setColor(ant.getColor());
             g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
         }
         for(Food food : sim.getFoods()){
-            g.setColor(Color.red);
+            g.setColor(food.getColor());
             width = food.getQuantity() * 2;
             height = food.getQuantity() * 2;
             g.fillRect(food.getPosX(), food.getPosY(), width, height);
             Foods.put(food.getPos(), food.getQuantity());
         }
+
+        for(Obstacle obstacle : sim.getObstacles()){
+            g.setColor(Color.GRAY);
+            g.drawOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
+            g.fillOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
+        }
+
+
+        g.setColor(Color.green);
+        g.fillRect(sim.getAnthill().getPosX(), sim.getAnthill().getPosY(), 10, 10);
     }
 
 }
