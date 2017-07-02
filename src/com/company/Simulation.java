@@ -1,7 +1,9 @@
 package com.company;
 
+import javax.xml.bind.annotation.XmlType;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -13,7 +15,8 @@ public class Simulation {
     private int nbNourritures;
     private int vitesseEvap;
     private ArrayList<Ant> ants;
-    private ArrayList<Food> foods;
+    private ArrayList<Obstacle> obstacles;
+    private HashSet<Food> foods;
     private ArrayList<Pheromone> pheromones;
     private Anthill anthill;
     private int destX = 50, destY = 50;
@@ -24,11 +27,13 @@ public class Simulation {
         this.nbNourritures = nbNourritures;
         this.vitesseEvap = vitesseEvap;
         this.ants = new ArrayList<Ant>();
-        this.foods = new ArrayList<Food>();
+        this.foods = new HashSet<Food>();
+        this.obstacles = new ArrayList<Obstacle>();
         this.pheromones = new ArrayList<Pheromone>();
         this.anthill = new Anthill(50, 50);
         this.createAnts();
         this.createFoods();
+        this.createObstacles();
     }
 
     public void nextStep() {
@@ -36,7 +41,7 @@ public class Simulation {
         for (Ant ant : ants) {
             // La fourmi n'a pas encore vu de nourriture
             if (!ant.hasDetectFood()) {
-                if (cpt%50 == 0) {
+                if (cpt % 50 == 0) {
                     ant.getRandomPoint();
                     cpt = 0;
                 }
@@ -55,8 +60,8 @@ public class Simulation {
                 for (Food food : foods) {
                     if (
                             Math.abs(ant.getPosX() - food.getPosX()) <= 20 &&
-                            Math.abs(ant.getPosY() - food.getPosY()) <= 20 &&
-                            food.getQuantity() > 0
+                                    Math.abs(ant.getPosY() - food.getPosY()) <= 20 &&
+                                    food.getQuantity() > 0
                             ) {
                         ant.setDetectFood(true);
                         ant.setTargetFood(food);
@@ -81,8 +86,8 @@ public class Simulation {
                 ant.setPosY(y);
                 if (
                         ant.getPosX() == ant.getTargetFood().getPosX() &&
-                        ant.getPosY() == ant.getTargetFood().getPosY() &&
-                        ant.getTargetFood().getQuantity() > 0
+                                ant.getPosY() == ant.getTargetFood().getPosY() &&
+                                ant.getTargetFood().getQuantity() > 0
                         ) {
                     ant.setHasFood(true);
                     int foodQty = ant.getTargetFood().getQuantity();
@@ -112,7 +117,7 @@ public class Simulation {
                 ant.setPosY(y);
                 if (
                         ant.getPosX() == anthill.getPosX() &&
-                        ant.getPosY() == anthill.getPosY()
+                                ant.getPosY() == anthill.getPosY()
                         ) {
                     ant.setHasFood(false);
                     ant.setDetectFood(false);
@@ -131,13 +136,23 @@ public class Simulation {
         }
     }
 
+    public void createObstacles(){
+        for (int i = 0; i < 3; i++){
+            Obstacle obstacle = new Obstacle(getRandomX(), getRandomY());
+            this.obstacles.add(obstacle);
+        }
+    }
+
     public void createAnts() {
-        int diff;
+        int diffX;
+        int diffY;
         Random rand = new Random();
         for (int i = 0; i < this.nbFourmis; i++) {
-            diff = rand.nextInt(30);
-            diff -= 15;
-            Ant ant = new Ant(this.anthill.getPosX()+diff, this.anthill.getPosY()+diff);
+            diffX = rand.nextInt(30);
+            diffX -= 15;
+            diffY = rand.nextInt(30);
+            diffY -= 15;
+            Ant ant = new Ant(this.anthill.getPosX()+diffX, this.anthill.getPosY()+diffY);
             this.ants.add(ant);
         }
     }
@@ -149,6 +164,7 @@ public class Simulation {
         }
     }
 
+
     public ArrayList<Ant> getAnts() {
         return ants;
     }
@@ -157,11 +173,13 @@ public class Simulation {
         this.ants = ants;
     }
 
-    public ArrayList<Food> getFoods() {
+    public HashSet<Food> getFoods() {
         return foods;
     }
 
-    public void setFoods(ArrayList<Food> foods) {
+    public ArrayList<Obstacle> getObstacles() { return obstacles; }
+
+    public void setFoods(HashSet<Food> foods) {
         this.foods = foods;
     }
 

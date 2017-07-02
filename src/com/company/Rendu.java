@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -16,7 +18,6 @@ public class Rendu extends JPanel {
 
 
     JFrame f = new JFrame();
-    //JPanel c = new JPanel();
     int widthFrame, heightFrame;
     Simulation sim;
 
@@ -31,7 +32,6 @@ public class Rendu extends JPanel {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLocationRelativeTo(null);
         f.getContentPane().add(this);
-
         f.setVisible(true);
     }
 
@@ -42,6 +42,9 @@ public class Rendu extends JPanel {
 
     int width;
     int height;
+
+
+    Map<Point, Integer> Foods = new HashMap<Point, Integer>();
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -55,11 +58,20 @@ public class Rendu extends JPanel {
             width = food.getQuantity() * 2;
             height = food.getQuantity() * 2;
             g.fillRect(food.getPosX(), food.getPosY(), width, height);
+            Foods.put(food.getPos(), food.getQuantity());
         }
         for (Pheromone pheromone : sim.getPheromones()) {
             g.setColor(pheromone.getColor());
-            g.fillRect(pheromone.getPosX(), pheromone.getPosY(), 1, 1);
+            g.fillRect(pheromone.getPosX(), pheromone.getPosY(), 2, 2);
         }
+
+        for(Obstacle obstacle : sim.getObstacles()){
+            g.setColor(Color.GRAY);
+            g.drawOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
+            g.fillOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
+        }
+
+
         g.setColor(Color.green);
         g.fillRect(sim.getAnthill().getPosX(), sim.getAnthill().getPosY(), 10, 10);
     }

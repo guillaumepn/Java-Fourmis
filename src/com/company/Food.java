@@ -9,9 +9,9 @@ import java.util.Random;
  */
 public class Food {
 
-    private int quantity;
     private int posX;
     private int posY;
+    private int quantity;
     private Color color;
 
     Random random = new Random();
@@ -46,6 +46,8 @@ public class Food {
     public void setPosY(int posY) {
         this.posY = posY;
     }
+
+    public Point getPos() { return new Point(posX, posY); }
 
     public Color getColor() {
         return color;
