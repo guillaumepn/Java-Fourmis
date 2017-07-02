@@ -98,6 +98,8 @@ public class Simulation {
                 ant.setDestY(anthill.getPosY());
                 int x = ant.getPosX();
                 int y = ant.getPosY();
+                Pheromone pheromone = new Pheromone(x, y);
+                this.pheromones.add(pheromone);
                 if (x < ant.getDestX())
                     x++;
                 else if (x > ant.getDestX())
@@ -117,11 +119,25 @@ public class Simulation {
                 }
             }
         }
+
+        for (Pheromone pheromone : pheromones) {
+            if (cpt%50 == 0) {
+                int duration = pheromone.getDuration();
+                pheromone.setDuration(duration - 1);
+            }
+            if (pheromone.getDuration() < 1) {
+                pheromone.setColor(Color.white);
+            }
+        }
     }
 
     public void createAnts() {
+        int diff;
+        Random rand = new Random();
         for (int i = 0; i < this.nbFourmis; i++) {
-            Ant ant = new Ant(this.anthill.getPosX(), this.anthill.getPosY());
+            diff = rand.nextInt(30);
+            diff -= 15;
+            Ant ant = new Ant(this.anthill.getPosX()+diff, this.anthill.getPosY()+diff);
             this.ants.add(ant);
         }
     }

@@ -16,12 +16,14 @@ public class Ant extends JComponent {
     private boolean detectFood;
     private Color color;
     private Food targetFood;
+    private int idPheromone;
 
     public Ant(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.hasFood = false;
         this.detectFood = false;
+        this.idPheromone = 0;
         this.color = Color.BLACK;
         this.getRandomPoint();
     }
