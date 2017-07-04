@@ -1,7 +1,7 @@
 package com.company;
 
 import java.awt.*;
-import java.lang.reflect.Array;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +13,7 @@ public class Obstacle {
     private int randomY;
     private int randomWidth;
     private int randomHeight;
+
 
     public Obstacle(int randomX, int randomY) {
         this.randomX = randomX;
@@ -52,8 +53,5 @@ public class Obstacle {
     public void setRandomHeight(int randomHeight) {
         this.randomHeight = randomHeight;
     }
-
-
-
 
 }
