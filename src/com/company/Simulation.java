@@ -54,7 +54,7 @@ public class Simulation {
 
 
             // La fourmi n'a pas encore vu de nourriture
-            if (!ant.hasDetectFood()) {
+            if (!ant.hasDetectFood() && !ant.isFollowPheromone()) {
                 if (cpt % 50 == 0) {
                     ant.getRandomPoint();
                     cpt = 0;
@@ -79,6 +79,19 @@ public class Simulation {
                             ) {
                         ant.setDetectFood(true);
                         ant.setTargetFood(food);
+                        break;
+                    }
+                }
+                for (Pheromone pheromone : pheromones) {
+                    if (
+                            (ant.getPosX() == pheromone.getPosX() ||
+                             ant.getPosX() == pheromone.getPosX()-1) &&
+                            (ant.getPosY() == pheromone.getPosY() ||
+                             ant.getPosY() == pheromone.getPosY()-1) &&
+                             pheromone.getDuration() >= 1
+                        ) {
+                        ant.setFollowPheromone(true);
+                        ant.setCurrentPheromone(pheromone);
                         break;
                     }
                 }
@@ -117,6 +130,10 @@ public class Simulation {
                 ant.setDestY(anthill.getPosY());
                 int x = ant.getPosX();
                 int y = ant.getPosY();
+                Pheromone pheromone = new Pheromone(x, y);
+                if (ant.getLastPheromone() != null)
+                    pheromone.setPreviousPheromone(ant.getLastPheromone());
+                this.pheromones.add(pheromone);
                 if (x < ant.getDestX())
                     x++;
                 else if (x > ant.getDestX())
@@ -127,13 +144,37 @@ public class Simulation {
                     y--;
                 ant.setPosX(x);
                 ant.setPosY(y);
+                ant.setLastPheromone(pheromone);
                 if (
                         ant.getPosX() == anthill.getPosX() &&
-                                ant.getPosY() == anthill.getPosY()
+                        ant.getPosY() == anthill.getPosY()
                         ) {
                     ant.setHasFood(false);
                     ant.setDetectFood(false);
                 }
+            } // La fourmi sans nourriture a croisé un chemin de phéromones
+            else if (!ant.hasDetectFood() && !ant.getHasFood() && ant.isFollowPheromone()) {
+                if (
+                        ant.getCurrentPheromone().getDuration() >= 1 &&
+                        ant.getCurrentPheromone().getPreviousPheromone() != null
+                    ) {
+                    Pheromone previousPheromone = ant.getCurrentPheromone().getPreviousPheromone();
+                    ant.setPosX(previousPheromone.getPosX());
+                    ant.setPosY(previousPheromone.getPosY());
+                    ant.setCurrentPheromone(previousPheromone);
+                } else {
+                    ant.setFollowPheromone(false);
+                }
+            }
+        }
+
+        for (Pheromone pheromone : pheromones) {
+            if (cpt%50 == 0) {
+                int duration = pheromone.getDuration();
+                pheromone.setDuration(duration - 1);
+            }
+            if (pheromone.getDuration() < 1) {
+                pheromone.setColor(Color.white);
             }
         }
     }
@@ -149,8 +190,15 @@ public class Simulation {
     }
 
     public void createAnts() {
+        int diffX;
+        int diffY;
+        Random rand = new Random();
         for (int i = 0; i < this.nbFourmis; i++) {
-            Ant ant = new Ant(this.anthill.getPosX(), this.anthill.getPosY());
+            diffX = rand.nextInt(30);
+            diffX -= 15;
+            diffY = rand.nextInt(30);
+            diffY -= 15;
+            Ant ant = new Ant(this.anthill.getPosX()+diffX, this.anthill.getPosY()+diffY);
             this.ants.add(ant);
         }
     }

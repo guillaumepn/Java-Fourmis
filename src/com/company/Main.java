@@ -18,7 +18,7 @@ public class Main {
         while (true) {
             sim.nextStep();
             rendu.paint(sim);
-            try { Thread.sleep(50); } catch (InterruptedException e) { e.printStackTrace(); }
+            try { Thread.sleep(30); } catch (InterruptedException e) { e.printStackTrace(); }
         }
 
     }

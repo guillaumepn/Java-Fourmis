@@ -47,7 +47,7 @@ public class Rendu extends JPanel {
     int height;
 
 
-    Map<Point, Integer> Foods = new HashMap<>();
+    Map<Point, Integer> Foods = new HashMap<Point, Integer>();
     @Override
     public void paintComponent(Graphics g) {
 
@@ -58,13 +58,16 @@ public class Rendu extends JPanel {
             g.setColor(ant.getColor());
             g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
         }
-
         for(Food food : sim.getFoods()){
             g.setColor(food.getColor());
             width = food.getQuantity() * 2;
             height = food.getQuantity() * 2;
             g.fillRect(food.getPosX(), food.getPosY(), width, height);
             Foods.put(food.getPos(), food.getQuantity());
+        }
+        for (Pheromone pheromone : sim.getPheromones()) {
+            g.setColor(pheromone.getColor());
+            g.fillRect(pheromone.getPosX(), pheromone.getPosY(), 2, 2);
         }
 
         for(Obstacle obstacle : sim.getObstacles()){
