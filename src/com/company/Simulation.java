@@ -89,7 +89,8 @@ public class Simulation {
                             (ant.getPosY() == pheromone.getPosY() ||
                              ant.getPosY() == pheromone.getPosY()-1) &&
                              pheromone.getDuration() >= 1 &&
-                             pheromone.getPreviousPheromone() != null
+                            (pheromone.getPreviousPheromone() != null &&
+                             pheromone.getPreviousPheromone().getDuration() >= 1)
                         ) {
                         ant.setFollowPheromone(true);
                         ant.setCurrentPheromone(pheromone);
@@ -177,7 +178,8 @@ public class Simulation {
                 pheromone.setDuration(duration - 1);
             }
             if (pheromone.getDuration() < 1) {
-                pheromone.setColor(Color.white);
+                Color noPheromone = new Color(255, 255, 0, 0);
+                pheromone.setColor(noPheromone);
             }
         }
     }
@@ -212,7 +214,6 @@ public class Simulation {
             this.foods.add(food);
         }
     }
-
 
     public ArrayList<Ant> getAnts() {
         return ants;
