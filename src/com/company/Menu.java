@@ -9,6 +9,7 @@ public class Menu extends JDialog {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
+    private JSlider slider1;
 
     public Menu() {
         setContentPane(contentPane);
@@ -35,6 +36,10 @@ public class Menu extends JDialog {
         return Integer.parseInt(textField3.getText());
     }
 
+    public int getSlider1() {
+        return slider1.getValue();
+    }
+
     private void onOK() {
         if (textField1.getText().equals("") || textField2.getText().equals("") || textField3.getText().equals("") ) {
             JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Erreur",
@@ -50,7 +55,7 @@ public class Menu extends JDialog {
     }
 
     public MenuInfo getValue() {
-        MenuInfo menuInfo = new MenuInfo(getTextField1(), getTextField2(), getTextField3());
+        MenuInfo menuInfo = new MenuInfo(getTextField1(), getTextField2(), getTextField3(), getSlider1());
         return menuInfo;
     }
 
