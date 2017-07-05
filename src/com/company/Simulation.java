@@ -74,7 +74,8 @@ public class Simulation {
                              ant.getPosX() == pheromone.getPosX()-1) &&
                             (ant.getPosY() == pheromone.getPosY() ||
                              ant.getPosY() == pheromone.getPosY()-1) &&
-                             pheromone.getDuration() >= 1
+                             pheromone.getDuration() >= 1 &&
+                             pheromone.getPreviousPheromone() != null
                         ) {
                         ant.setFollowPheromone(true);
                         ant.setCurrentPheromone(pheromone);
@@ -152,6 +153,7 @@ public class Simulation {
                     ant.setFollowPheromone(false);
                 }
             }
+
         }
 
         for (Pheromone pheromone : pheromones) {

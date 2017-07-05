@@ -16,10 +16,12 @@ import java.util.Random;
  */
 public class Rendu extends JPanel {
 
-
-    JFrame f = new JFrame();
-    int widthFrame, heightFrame;
-    Simulation sim;
+    private JFrame f = new JFrame();
+    private int widthFrame, heightFrame;
+    private Simulation sim;
+    private int width;
+    private int height;
+    private Map<Point, Integer> Foods = new HashMap<Point, Integer>();
 
     public Rendu(int widthFrame, int heightFrame, Simulation sim) {
         this.widthFrame = widthFrame;
@@ -40,11 +42,6 @@ public class Rendu extends JPanel {
         repaint();
     }
 
-    int width;
-    int height;
-
-
-    Map<Point, Integer> Foods = new HashMap<Point, Integer>();
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -70,7 +67,6 @@ public class Rendu extends JPanel {
             g.drawOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
             g.fillOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
         }
-
 
         g.setColor(Color.green);
         g.fillRect(sim.getAnthill().getPosX(), sim.getAnthill().getPosY(), 10, 10);

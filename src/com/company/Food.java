@@ -14,9 +14,8 @@ public class Food {
     private int quantity;
     private Color color;
 
-    Random random = new Random();
-
     public Food(int posX, int posY) {
+        Random random = new Random();
         this.quantity = random.nextInt(5) + 2;
         this.posX = posX;
         this.posY = posY;

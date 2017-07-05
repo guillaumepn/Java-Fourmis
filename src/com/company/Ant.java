@@ -12,13 +12,13 @@ public class Ant extends JComponent {
     private int posY;
     private int destX;
     private int destY;
+    private int previousX;
+    private int previousY;
     private boolean hasFood;
     private boolean detectFood;
     private Color color;
     private Food targetFood;
-    private int idPheromone;
     private boolean followPheromone;
-    private Pheromone previousPheromone;
     private Pheromone currentPheromone;
     private Pheromone lastPheromone;
 
@@ -27,9 +27,7 @@ public class Ant extends JComponent {
         this.posY = posY;
         this.hasFood = false;
         this.detectFood = false;
-        this.idPheromone = 0;
         this.followPheromone = false;
-        this.previousPheromone = null;
         this.lastPheromone = null;
         this.color = Color.BLACK;
         this.getRandomPoint();
@@ -98,6 +96,22 @@ public class Ant extends JComponent {
         this.color = color;
     }
 
+    public int getPreviousX() {
+        return previousX;
+    }
+
+    public void setPreviousX(int previousX) {
+        this.previousX = previousX;
+    }
+
+    public int getPreviousY() {
+        return previousY;
+    }
+
+    public void setPreviousY(int previousY) {
+        this.previousY = previousY;
+    }
+
     public boolean hasDetectFood() {
         return detectFood;
     }
@@ -128,14 +142,6 @@ public class Ant extends JComponent {
 
     public void setFollowPheromone(boolean followPheromone) {
         this.followPheromone = followPheromone;
-    }
-
-    public Pheromone getPreviousPheromone() {
-        return previousPheromone;
-    }
-
-    public void setPreviousPheromone(Pheromone previousPheromone) {
-        this.previousPheromone = previousPheromone;
     }
 
     public Pheromone getLastPheromone() {

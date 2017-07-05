@@ -79,7 +79,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="10"/>
+            </properties>
           </component>
           <component id="d9528" class="javax.swing.JTextField" binding="textField2" default-binding="true">
             <constraints>
@@ -87,7 +89,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="10"/>
+            </properties>
           </component>
           <component id="b3639" class="javax.swing.JTextField" binding="textField3" default-binding="true">
             <constraints>
@@ -95,7 +99,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="10"/>
+            </properties>
           </component>
         </children>
       </grid>

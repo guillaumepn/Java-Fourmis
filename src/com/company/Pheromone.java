@@ -11,7 +11,6 @@ public class Pheromone {
     private int posY;
     private int duration;
     private Color color;
-    private int index;
     private Pheromone previousPheromone;
 
     public Pheromone(int posX, int posY) {
@@ -44,14 +43,6 @@ public class Pheromone {
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     public Color getColor() {
