@@ -30,11 +30,11 @@ public class Simulation {
         this.nbFourmis = nbFourmis;
         this.nbNourritures = nbNourritures;
         this.vitesseEvap = vitesseEvap;
-        this.ants = new ArrayList<>();
-        this.foods = new HashSet<>();
-        this.obstacles = new ArrayList<>();
-        this.obstaclesShape = new ArrayList<>();
-        this.pheromones = new ArrayList<>();
+        this.ants = new ArrayList<Ant>();
+        this.foods = new HashSet<Food>();
+        this.obstacles = new ArrayList<Obstacle>();
+        this.obstaclesShape = new ArrayList<Shape>();
+        this.pheromones = new ArrayList<Pheromone>();
         this.anthill = new Anthill(50, 50);
         this.createAnts();
         this.createFoods();
