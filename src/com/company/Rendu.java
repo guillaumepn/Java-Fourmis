@@ -51,7 +51,6 @@ public class Rendu extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.black);
         for (Ant ant : sim.getAnts()) {
-            Shape rect = new Rectangle2D.Double(ant.getPosX(), ant.getPosY(), 5, 5);
             g.setColor(ant.getColor());
             g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
         }
@@ -68,10 +67,9 @@ public class Rendu extends JPanel {
         }
 
         for(Obstacle obstacle : sim.getObstacles()){
-            Shape ovale = new Ellipse2D.Double(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
             g.setColor(Color.GRAY);
-            g.drawOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
-            g.fillOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
+            g.drawOval(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getWidth());
+            g.fillOval(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getWidth());
         }
 
         g.setColor(Color.green);

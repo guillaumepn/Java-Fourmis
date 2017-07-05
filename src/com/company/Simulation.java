@@ -17,9 +17,7 @@ public class Simulation {
     private int nbNourritures;
     private int vitesseEvap;
     private ArrayList<Ant> ants;
-    private ArrayList<Shape> antsShape;
     private ArrayList<Obstacle> obstacles;
-    private ArrayList<Shape> obstaclesShape;
     private HashSet<Food> foods;
     private ArrayList<Pheromone> pheromones;
     private Anthill anthill;
@@ -32,7 +30,6 @@ public class Simulation {
         this.ants = new ArrayList<Ant>();
         this.foods = new HashSet<Food>();
         this.obstacles = new ArrayList<Obstacle>();
-        this.obstaclesShape = new ArrayList<Shape>();
         this.pheromones = new ArrayList<Pheromone>();
         this.anthill = new Anthill(50, 50);
         this.createAnts();
@@ -43,21 +40,20 @@ public class Simulation {
     public void nextStep() {
         cpt++;
         for (Ant ant : ants) {
-            //Collision
-            Shape rect = new Rectangle2D.Double(ant.getPosX(), ant.getPosY(), 5, 5);
-            for (Shape obstacle : obstaclesShape) {
-                if(obstacle.intersects(rect.getBounds())){
-                    System.out.println("Boom");
+            //Test collision
+            for(Obstacle obstacle : obstacles){
+                if(Math.pow(obstacle.getCenter().getY() - ant.getPosY(),2) + Math.pow(obstacle.getCenter().getX() - ant.getPosX() ,2) <= Math.pow(obstacle.getWidth(), 2)){
+                    ant.getRandomPoint();
                 }
             }
 
-
             // La fourmi n'a pas encore vu de nourriture
             if (!ant.hasDetectFood() && !ant.isFollowPheromone()) {
-                if (cpt % 50 == 0) {
+                if (cpt % 20 == 0) {
                     ant.getRandomPoint();
                     cpt = 0;
                 }
+
                 int x = ant.getPosX();
                 int y = ant.getPosY();
                 if (x < ant.getDestX())
@@ -187,9 +183,6 @@ public class Simulation {
         for (int i = 0; i < 3; i++){
             Obstacle obstacle = new Obstacle(getRandomX(), getRandomY());
             this.obstacles.add(obstacle);
-
-            Shape oval = new Ellipse2D.Double(getRandomX(), getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
-            this.obstaclesShape.add(oval);
         }
     }
 
@@ -218,59 +211,20 @@ public class Simulation {
         return ants;
     }
 
-    public void setAnts(ArrayList<Ant> ants) {
-        this.ants = ants;
-    }
-
     public HashSet<Food> getFoods() {
         return foods;
     }
 
     public ArrayList<Obstacle> getObstacles() { return obstacles; }
 
-    public void setFoods(HashSet<Food> foods) {
-        this.foods = foods;
-    }
-
     public ArrayList<Pheromone> getPheromones() {
         return pheromones;
-    }
-
-    public void setPheromones(ArrayList<Pheromone> pheromones) {
-        this.pheromones = pheromones;
     }
 
     public Anthill getAnthill() {
         return anthill;
     }
 
-    public void setAnthill(Anthill anthill) {
-        this.anthill = anthill;
-    }
-
-    public int getNbFourmis() {
-        return nbFourmis;
-    }
-
-    public void setNbFourmis(int nbFourmis) {
-        this.nbFourmis = nbFourmis;
-    }
-
-    public int getNbNourritures() {
-        return nbNourritures;
-    }
-
-    public void setNbNourritures(int nbNourritures) {
-        this.nbNourritures = nbNourritures;
-    }
-
-    public int getVitesseEvap() {
-        return vitesseEvap;
-    }
-
-    public void setVitesseEvap(int vitesseEvap) {
-        this.vitesseEvap = vitesseEvap;
-    }
 
     public int getRandomX() {
         int posX;

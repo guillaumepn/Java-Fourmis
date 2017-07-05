@@ -2,6 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 /**
@@ -21,6 +22,7 @@ public class Ant extends JComponent {
     private boolean followPheromone;
     private Pheromone currentPheromone;
     private Pheromone lastPheromone;
+    private Shape shape;
 
     public Ant(int posX, int posY) {
         this.posX = posX;
@@ -30,7 +32,9 @@ public class Ant extends JComponent {
         this.followPheromone = false;
         this.lastPheromone = null;
         this.color = Color.BLACK;
+        this.shape = new Rectangle2D.Double(this.posX, this.posY, 5, 5);
         this.getRandomPoint();
+        this.getShape();
     }
 
     public int getPosX() {
@@ -62,6 +66,8 @@ public class Ant extends JComponent {
         }
     }
 
+    public Shape getShape(){ return shape; }
+
     public int getDestX() {
         return destX;
     }
@@ -78,10 +84,6 @@ public class Ant extends JComponent {
         this.destY = destY;
     }
 
-    public Point getPos(){
-        return new Point(posX,posY);
-    }
-
     public void getRandomPoint() {
         Random rand = new Random();
         destX = rand.nextInt(640);
@@ -90,26 +92,6 @@ public class Ant extends JComponent {
 
     public Color getColor() {
         return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public int getPreviousX() {
-        return previousX;
-    }
-
-    public void setPreviousX(int previousX) {
-        this.previousX = previousX;
-    }
-
-    public int getPreviousY() {
-        return previousY;
-    }
-
-    public void setPreviousY(int previousY) {
-        this.previousY = previousY;
     }
 
     public boolean hasDetectFood() {
