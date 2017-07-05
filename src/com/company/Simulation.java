@@ -2,6 +2,8 @@ package com.company;
 
 import javax.xml.bind.annotation.XmlType;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -15,7 +17,9 @@ public class Simulation {
     private int nbNourritures;
     private int vitesseEvap;
     private ArrayList<Ant> ants;
+    private ArrayList<Shape> antsShape;
     private ArrayList<Obstacle> obstacles;
+    private ArrayList<Shape> obstaclesShape;
     private HashSet<Food> foods;
     private ArrayList<Pheromone> pheromones;
     private Anthill anthill;
@@ -26,10 +30,11 @@ public class Simulation {
         this.nbFourmis = nbFourmis;
         this.nbNourritures = nbNourritures;
         this.vitesseEvap = vitesseEvap;
-        this.ants = new ArrayList<Ant>();
-        this.foods = new HashSet<Food>();
-        this.obstacles = new ArrayList<Obstacle>();
-        this.pheromones = new ArrayList<Pheromone>();
+        this.ants = new ArrayList<>();
+        this.foods = new HashSet<>();
+        this.obstacles = new ArrayList<>();
+        this.obstaclesShape = new ArrayList<>();
+        this.pheromones = new ArrayList<>();
         this.anthill = new Anthill(50, 50);
         this.createAnts();
         this.createFoods();
@@ -39,6 +44,15 @@ public class Simulation {
     public void nextStep() {
         cpt++;
         for (Ant ant : ants) {
+            //Collision
+            Shape rect = new Rectangle2D.Double(ant.getPosX(), ant.getPosY(), 5, 5);
+            for (Shape obstacle : obstaclesShape) {
+                if(obstacle.intersects(rect.getBounds())){
+                    System.out.println("Boom");
+                }
+            }
+
+
             // La fourmi n'a pas encore vu de nourriture
             if (!ant.hasDetectFood() && !ant.isFollowPheromone()) {
                 if (cpt % 50 == 0) {
@@ -171,6 +185,9 @@ public class Simulation {
         for (int i = 0; i < 3; i++){
             Obstacle obstacle = new Obstacle(getRandomX(), getRandomY());
             this.obstacles.add(obstacle);
+
+            Shape oval = new Ellipse2D.Double(getRandomX(), getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
+            this.obstaclesShape.add(oval);
         }
     }
 

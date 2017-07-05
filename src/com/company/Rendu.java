@@ -3,6 +3,9 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
@@ -44,13 +47,15 @@ public class Rendu extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         g.setColor(Color.black);
         for (Ant ant : sim.getAnts()) {
+            Shape rect = new Rectangle2D.Double(ant.getPosX(), ant.getPosY(), 5, 5);
             g.setColor(ant.getColor());
             g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
         }
-        for (Food food : sim.getFoods()){
+        for(Food food : sim.getFoods()){
             g.setColor(food.getColor());
             width = food.getQuantity() * 2;
             height = food.getQuantity() * 2;
@@ -63,6 +68,7 @@ public class Rendu extends JPanel {
         }
 
         for(Obstacle obstacle : sim.getObstacles()){
+            Shape ovale = new Ellipse2D.Double(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
             g.setColor(Color.GRAY);
             g.drawOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
             g.fillOval(obstacle.getRandomX(), obstacle.getRandomY(), obstacle.getRandomWidth(), obstacle.getRandomHeight());
