@@ -41,12 +41,29 @@ public class Simulation {
         cpt++;
         for (Ant ant : ants) {
             //Test collision
-            for(Obstacle obstacle : obstacles){
-                if(Math.pow(obstacle.getCenter().getY() - ant.getPosY(),2) + Math.pow(obstacle.getCenter().getX() - ant.getPosX() ,2) <= Math.pow(obstacle.getWidth(), 2)){
-                    ant.getRandomPoint();
+            for(Obstacle obstacle : obstacles) {
+                Shape ball = new Ellipse2D.Double(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getWidth());
+                Shape square = new Rectangle2D.Double(ant.getPosX()+1, ant.getPosY(), 5, 5);
+                if (square.getBounds2D().intersects(ball.getBounds2D())) {
+                    ant.setPosX(ant.getPosX()-1);
                 }
-            }
 
+                Shape square2 = new Rectangle2D.Double(ant.getPosX()-1, ant.getPosY(), 5, 5);
+                if (square2.getBounds2D().intersects(ball.getBounds2D())) {
+                    ant.setPosX(ant.getPosX()+1);
+                }
+
+                Shape square3 = new Rectangle2D.Double(ant.getPosX(), ant.getPosY()+1, 5, 5);
+                if (square3.getBounds2D().intersects(ball.getBounds2D())) {
+                    ant.setPosY(ant.getPosY()-1);
+                }
+
+                Shape square4 = new Rectangle2D.Double(ant.getPosX(), ant.getPosY()-1, 5, 5);
+                if (square4.getBounds2D().intersects(ball.getBounds2D())) {
+                    ant.setPosY(ant.getPosY()+1);
+                }
+
+            }
             // La fourmi n'a pas encore vu de nourriture
             if (!ant.hasDetectFood() && !ant.isFollowPheromone()) {
                 if (cpt % 20 == 0) {
@@ -128,6 +145,7 @@ public class Simulation {
                 int x = ant.getPosX();
                 int y = ant.getPosY();
                 Pheromone pheromone = new Pheromone(x, y);
+                pheromone.setDuration(this.vitesseEvap);
                 if (ant.getLastPheromone() != null)
                     pheromone.setPreviousPheromone(ant.getLastPheromone());
                 this.pheromones.add(pheromone);
