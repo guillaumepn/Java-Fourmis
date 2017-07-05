@@ -1,57 +1,40 @@
 package com.company;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.util.ArrayList;
+
+
 
 /**
  * Created by Mawel on 28/06/17.
  */
 public class Obstacle {
 
-    private int randomX;
-    private int randomY;
-    private int randomWidth;
-    private int randomHeight;
+    private int posX;
+    private int posY;
+    private int width;
 
 
-    public Obstacle(int randomX, int randomY) {
-        this.randomX = randomX;
-        this.randomY = randomY;
-        this.randomWidth = 50 + (int)(Math.random() * 200);
-        this.randomHeight = 50 + (int)(Math.random() * 200);
+    public Obstacle(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+        this.width = 50 + (int)(Math.random() * 100);
+        this.getCenter();
     }
 
-    public int getRandomX() {
-        return randomX;
+    public int getX() {
+        return posX;
     }
 
-    public void setRandomX(int randomX) {
-        this.randomX = randomX;
+    public int getY() {
+        return posY;
     }
 
-    public int getRandomY() {
-        return randomY;
+    public Point getCenter(){
+        return new Point( (posX + width)  /2,  (posY + width) /2);
     }
 
-    public void setRandomY(int randomY) {
-        this.randomY = randomY;
-    }
-
-    public int getRandomWidth() {
-        return randomWidth;
-    }
-
-    public void setRandomWidth(int randomWidth) {
-        this.randomWidth = randomWidth;
-    }
-
-    public int getRandomHeight() {
-        return randomHeight;
-    }
-
-    public void setRandomHeight(int randomHeight) {
-        this.randomHeight = randomHeight;
+    public int getWidth() {
+        return width;
     }
 
 }
