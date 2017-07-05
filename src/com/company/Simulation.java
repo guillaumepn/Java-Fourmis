@@ -23,7 +23,6 @@ public class Simulation {
     private HashSet<Food> foods;
     private ArrayList<Pheromone> pheromones;
     private Anthill anthill;
-    private int destX = 50, destY = 50;
     private int cpt = 0;
 
     public Simulation(int nbFourmis, int nbNourritures, int vitesseEvap) {
