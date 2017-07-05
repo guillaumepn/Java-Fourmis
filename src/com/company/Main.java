@@ -10,6 +10,8 @@ public class Main {
         Menu menu = new Menu();
 
         menu.setSize(400, 250);
+        menu.setUndecorated(true);
+        menu.setLocationRelativeTo(null);
         menu.show();
 
         menuInfo = menu.getValue();
@@ -21,7 +23,7 @@ public class Main {
         while (true) {
             sim.nextStep();
             rendu.paint(sim);
-            try { Thread.sleep(30); } catch (InterruptedException e) { e.printStackTrace(); }
+            try { Thread.sleep(menuInfo.getAnimationSpeed()); } catch (InterruptedException e) { e.printStackTrace(); }
         }
 
     }
