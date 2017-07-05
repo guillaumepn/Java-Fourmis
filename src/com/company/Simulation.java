@@ -157,7 +157,8 @@ public class Simulation {
             else if (!ant.hasDetectFood() && !ant.getHasFood() && ant.isFollowPheromone()) {
                 if (
                         ant.getCurrentPheromone().getDuration() >= 1 &&
-                        ant.getCurrentPheromone().getPreviousPheromone() != null
+                        (ant.getCurrentPheromone().getPreviousPheromone() != null &&
+                        ant.getCurrentPheromone().getPreviousPheromone().getDuration() >= 1)
                     ) {
                     Pheromone previousPheromone = ant.getCurrentPheromone().getPreviousPheromone();
                     ant.setPosX(previousPheromone.getPosX());
