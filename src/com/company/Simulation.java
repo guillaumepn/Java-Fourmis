@@ -42,7 +42,7 @@ public class Simulation {
         for (Ant ant : ants) {
             //Test collision
             for(Obstacle obstacle : obstacles) {
-                Shape ball = new Ellipse2D.Double(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getWidth());
+                Shape ball = new Ellipse2D.Double(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
                 Shape square = new Rectangle2D.Double(ant.getPosX()+1, ant.getPosY(), 5, 5);
                 if (square.getBounds2D().intersects(ball.getBounds2D())) {
                     ant.setPosX(ant.getPosX()-1);

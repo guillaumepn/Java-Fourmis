@@ -12,12 +12,14 @@ public class Obstacle {
     private int posX;
     private int posY;
     private int width;
+    private int height;
 
 
     public Obstacle(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.width = 50 + (int)(Math.random() * 100);
+        this.height = 50 + (int)(Math.random() * 100);
         this.getCenter();
     }
 
@@ -36,5 +38,7 @@ public class Obstacle {
     public int getWidth() {
         return width;
     }
+
+    public int getHeight() { return height; }
 
 }

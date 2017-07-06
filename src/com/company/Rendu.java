@@ -68,8 +68,8 @@ public class Rendu extends JPanel {
 
         for(Obstacle obstacle : sim.getObstacles()){
             g.setColor(Color.GRAY);
-            g.drawOval(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getWidth());
-            g.fillOval(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getWidth());
+            g.drawOval(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
+            g.fillOval(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
         }
 
         g.setColor(Color.green);
