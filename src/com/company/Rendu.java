@@ -50,21 +50,6 @@ public class Rendu extends JPanel {
 
         super.paintComponent(g);
         g.setColor(Color.black);
-        for (Ant ant : sim.getAnts()) {
-            g.setColor(ant.getColor());
-            g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
-        }
-        for(Food food : sim.getFoods()){
-            g.setColor(food.getColor());
-            width = food.getQuantity() * 2;
-            height = food.getQuantity() * 2;
-            g.fillRect(food.getPosX(), food.getPosY(), width, height);
-            Foods.put(food.getPos(), food.getQuantity());
-        }
-        for (Pheromone pheromone : sim.getPheromones()) {
-            g.setColor(pheromone.getColor());
-            g.fillRect(pheromone.getPosX(), pheromone.getPosY(), 2, 2);
-        }
 
         for(Obstacle obstacle : sim.getObstacles()){
             g.setColor(Color.GRAY);
@@ -74,6 +59,27 @@ public class Rendu extends JPanel {
 
         g.setColor(new Color(143, 89, 34));
         g.fillRect(sim.getAnthill().getPosX(), sim.getAnthill().getPosY(), 10, 10);
+
+        g.setColor(Color.black);
+
+        for (Ant ant : sim.getAnts()) {
+            g.setColor(ant.getColor());
+            g.fillRect(ant.getPosX(), ant.getPosY(), 5, 5);
+        }
+
+        for (Pheromone pheromone : sim.getPheromones()) {
+            g.setColor(pheromone.getColor());
+            g.fillRect(pheromone.getPosX(), pheromone.getPosY(), 2, 2);
+        }
+
+        for(Food food : sim.getFoods()){
+            g.setColor(food.getColor());
+            width = food.getQuantity() * 2;
+            height = food.getQuantity() * 2;
+            g.fillRect(food.getPosX(), food.getPosY(), width, height);
+            Foods.put(food.getPos(), food.getQuantity());
+        }
+
     }
 
 }

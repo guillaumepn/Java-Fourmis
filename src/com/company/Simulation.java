@@ -6,6 +6,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -33,8 +34,8 @@ public class Simulation {
         this.pheromones = new ArrayList<Pheromone>();
         this.anthill = new Anthill(50, 50);
         this.createAnts();
-        this.createFoods();
         this.createObstacles();
+        this.createFoods();
     }
 
     public void nextStep() {
@@ -231,6 +232,27 @@ public class Simulation {
 
     public void createFoods() {
         for (int i = 0; i < this.nbNourritures; i++) {
+            int x = this.getRandomX();
+            int y = this.getRandomX();
+
+            for (Obstacle item : obstacles) {
+                System.out.println(item);
+
+                boolean validPosition = false;
+
+                while (!validPosition) {
+                    if ((x >= item.getX() && x <= (item.getX() + item.getWidth())) &&
+                            (y >= item.getY() && y <= (item.getY() + item.getHeight()))) {
+                        System.out.println("bla");
+                        validPosition = false;
+                        x = this.getRandomX();
+                        y = this.getRandomX();
+                    } else {
+                        validPosition = true;
+                    }
+                }
+            }
+
             Food food = new Food(this.getRandomX(), this.getRandomY());
             this.foods.add(food);
         }
