@@ -211,6 +211,20 @@ public class Simulation {
 
     public void createObstacles(){
         for (int i = 0; i < 3; i++){
+            int x = getRandomX();
+            int y = getRandomY();
+            boolean validPosition = false;
+
+            while (!validPosition) {
+                if (x < 70 && y < 70) {
+                    validPosition = false;
+                    x = getRandomX();
+                    y = getRandomY();
+                } else {
+                    validPosition = true;
+                }
+            }
+
             Obstacle obstacle = new Obstacle(getRandomX(), getRandomY());
             this.obstacles.add(obstacle);
         }
@@ -236,14 +250,11 @@ public class Simulation {
             int y = this.getRandomX();
 
             for (Obstacle item : obstacles) {
-                System.out.println(item);
-
                 boolean validPosition = false;
 
                 while (!validPosition) {
-                    if ((x >= item.getX() && x <= (item.getX() + item.getWidth())) &&
-                            (y >= item.getY() && y <= (item.getY() + item.getHeight()))) {
-                        System.out.println("bla");
+                    if ((x >= item.getX() - 10 && x <= (item.getX() + item.getWidth() + 10)) &&
+                            (y >= item.getY() - 10 && y <= (item.getY() + item.getHeight() + 10))) {
                         validPosition = false;
                         x = this.getRandomX();
                         y = this.getRandomX();
@@ -253,7 +264,7 @@ public class Simulation {
                 }
             }
 
-            Food food = new Food(this.getRandomX(), this.getRandomY());
+            Food food = new Food(x, y);
             this.foods.add(food);
         }
     }
