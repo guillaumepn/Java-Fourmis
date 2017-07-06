@@ -146,6 +146,7 @@ public class Simulation {
                 int y = ant.getPosY();
                 Pheromone pheromone = new Pheromone(x, y);
                 pheromone.setDuration(this.vitesseEvap);
+                pheromone.setAlphaDecrementation(Math.round(255 / vitesseEvap));
                 if (ant.getLastPheromone() != null)
                     pheromone.setPreviousPheromone(ant.getLastPheromone());
                 this.pheromones.add(pheromone);
@@ -191,11 +192,17 @@ public class Simulation {
 
         for (Pheromone pheromone : pheromones) {
             if (cpt%50 == 0) {
+
                 int duration = pheromone.getDuration();
                 pheromone.setDuration(duration - 1);
+                pheromone.setAlpha(pheromone.getAlpha() - pheromone.getAlphaDecrementation());
+                if (pheromone.getAlpha() < 0) {
+                    pheromone.setAlpha(0);
+                }
+                pheromone.setColor(new Color(255, 0, 0, pheromone.getAlpha()));
             }
             if (pheromone.getDuration() < 1) {
-                Color noPheromone = new Color(255, 255, 0, 0);
+                Color noPheromone = new Color(255, 0, 0, 0);
                 pheromone.setColor(noPheromone);
             }
         }
