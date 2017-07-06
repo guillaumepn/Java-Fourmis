@@ -178,9 +178,13 @@ public class Simulation {
                     ant.setPosX(previousPheromone.getPosX());
                     ant.setPosY(previousPheromone.getPosY());
                     ant.setCurrentPheromone(previousPheromone);
+                } else if(ant.getCurrentPheromone().getPreviousPheromone() == null){
+                    ant.setFollowPheromone(false);
+                    ant.getRandomPoint();
                 } else {
                     ant.setFollowPheromone(false);
                 }
+
             }
 
         }

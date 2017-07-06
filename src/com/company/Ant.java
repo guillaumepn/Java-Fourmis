@@ -13,8 +13,6 @@ public class Ant extends JComponent {
     private int posY;
     private int destX;
     private int destY;
-    private int previousX;
-    private int previousY;
     private boolean hasFood;
     private boolean detectFood;
     private Color color;
@@ -59,11 +57,6 @@ public class Ant extends JComponent {
 
     public void setHasFood(boolean hasFood) {
         this.hasFood = hasFood;
-        if (hasFood) {
-            this.color = Color.GRAY;
-        } else {
-            this.color = Color.BLUE;
-        }
     }
 
     public Shape getShape(){ return shape; }
@@ -88,6 +81,9 @@ public class Ant extends JComponent {
         Random rand = new Random();
         destX = rand.nextInt(640);
         destY = rand.nextInt(480);
+        if(destX == posX || destY == posY){
+            getRandomPoint();
+        }
     }
 
     public Color getColor() {
