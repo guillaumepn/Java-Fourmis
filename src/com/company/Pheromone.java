@@ -12,13 +12,17 @@ public class Pheromone {
     private int duration;
     private Color color;
     private Pheromone previousPheromone;
+    private int alphaDecrementation;
+    private int alpha;
 
     public Pheromone(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
-        this.color = Color.yellow;
+        this.color = new Color(255, 0, 0, 255);
         this.previousPheromone = null;
         this.duration = 10;
+        this.alphaDecrementation = 25;
+        this.alpha = 255;
     }
 
     public int getPosX() {
@@ -59,5 +63,21 @@ public class Pheromone {
 
     public void setPreviousPheromone(Pheromone previousPheromone) {
         this.previousPheromone = previousPheromone;
+    }
+
+    public int getAlphaDecrementation() {
+        return alphaDecrementation;
+    }
+
+    public void setAlphaDecrementation(int alphaDecrementation) {
+        this.alphaDecrementation = alphaDecrementation;
+    }
+
+    public int getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(int alpha) {
+        this.alpha = alpha;
     }
 }

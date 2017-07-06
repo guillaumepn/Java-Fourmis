@@ -19,7 +19,7 @@ public class Food {
         this.quantity = random.nextInt(5) + 2;
         this.posX = posX;
         this.posY = posY;
-        this.color = Color.red;
+        this.color = Color.green.darker();
     }
 
     public int getQuantity() {

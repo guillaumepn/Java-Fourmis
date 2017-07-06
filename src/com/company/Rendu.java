@@ -72,7 +72,7 @@ public class Rendu extends JPanel {
             g.fillOval(obstacle.getX(), obstacle.getY(), obstacle.getWidth(), obstacle.getHeight());
         }
 
-        g.setColor(Color.green);
+        g.setColor(new Color(143, 89, 34));
         g.fillRect(sim.getAnthill().getPosX(), sim.getAnthill().getPosY(), 10, 10);
     }
 
